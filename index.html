@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23f97316'/%3E%3Ctext y='.9em' font-size='70' x='8'%3E{}%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodePrep — Free Coding Interview Prep. Beat LeetCode.</title>
+<meta name="description" content="Free coding interview questions with hints, solutions and explanations. Practice for Google, Meta, Amazon interviews. 100% free, forever.">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Familjen+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070709;
+  --surface: #0f0f14;
+  --card: #14141c;
+  --border: #1e1e2e;
+  --accent: #f97316;
+  --accent2: #6366f1;
+  --green: #22c55e;
+  --yellow: #eab308;
+  --red: #ef4444;
+  --text: #f1f1f5;
+  --muted: #6b6b80;
+  --mono: 'JetBrains Mono', monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Familjen Grotesk',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+
+/* GRID BG */
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image: radial-gradient(circle at 20% 20%, rgba(99,102,241,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(249,115,22,0.06) 0%, transparent 50%),
+    linear-gradient(rgba(30,30,46,0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,30,46,0.4) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* NAV */
+nav {
+  position:sticky; top:0; z-index:100;
+  padding:0 60px; height:64px;
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(7,7,9,0.9); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.logo { font-family:var(--mono); font-weight:700; font-size:1.1rem; display:flex; align-items:center; gap:10px; }
+.logo-icon { width:32px; height:32px; background:var(--accent); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1rem; }
+.logo span { color:var(--accent); }
+.nav-links { display:flex; gap:4px; }
+.nav-links a { padding:7px 14px; border-radius:6px; text-decoration:none; color:var(--muted); font-size:0.88rem; font-weight:500; transition:all 0.15s; }
+.nav-links a:hover { color:var(--text); background:var(--surface); }
+.nav-right { display:flex; align-items:center; gap:12px; }
+.nav-badge { background:var(--surface); border:1px solid var(--border); padding:6px 12px; border-radius:20px; font-size:0.75rem; color:var(--muted); font-family:var(--mono); }
+.nav-badge span { color:var(--green); }
+.btn-start { background:var(--accent); color:#fff; padding:8px 20px; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.88rem; transition:all 0.2s; }
+.btn-start:hover { background:#ea6c0a; transform:translateY(-1px); box-shadow:0 8px 24px rgba(249,115,22,0.3); }
+
+/* HERO */
+.hero {
+  position:relative; z-index:1;
+  padding:100px 60px 80px;
+  max-width:1200px; margin:0 auto;
+}
+.hero-top { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.hero-eyebrow { display:inline-flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:6px 16px; font-size:0.78rem; font-family:var(--mono); color:var(--muted); margin-bottom:24px; }
+.hero-eyebrow .tag { background:var(--accent); color:#fff; padding:2px 8px; border-radius:8px; font-size:0.7rem; font-weight:700; }
+h1 { font-size:clamp(2.8rem,5vw,4.2rem); font-weight:800; line-height:1.05; letter-spacing:-1.5px; margin-bottom:20px; }
+h1 .line-accent { color:var(--accent); display:block; }
+h1 .line-dim { color:var(--muted); display:block; font-size:0.6em; letter-spacing:0; font-weight:500; margin-top:8px; }
+.hero-desc { font-size:1.05rem; color:var(--muted); line-height:1.8; margin-bottom:36px; max-width:480px; }
+.hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:48px; }
+.btn-primary { background:var(--accent); color:#fff; padding:14px 28px; border-radius:10px; text-decoration:none; font-weight:700; font-size:0.95rem; transition:all 0.2s; display:inline-flex; align-items:center; gap:8px; }
+.btn-primary:hover { background:#ea6c0a; transform:translateY(-2px); box-shadow:0 12px 40px rgba(249,115,22,0.3); }
+.btn-outline { background:transparent; color:var(--text); padding:14px 28px; border-radius:10px; border:1px solid var(--border); text-decoration:none; font-weight:600; font-size:0.95rem; transition:all 0.2s; }
+.btn-outline:hover { border-color:var(--accent); color:var(--accent); }
+.hero-trust { display:flex; gap:24px; flex-wrap:wrap; }
+.trust-item { display:flex; align-items:center; gap:6px; font-size:0.82rem; color:var(--muted); }
+.trust-item .dot { width:6px; height:6px; border-radius:50%; background:var(--green); }
+
+/* TERMINAL MOCKUP */
+.terminal { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; box-shadow:0 40px 80px rgba(0,0,0,0.5); }
+.term-bar { background:var(--surface); padding:12px 16px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+.term-dot { width:12px; height:12px; border-radius:50%; }
+.td1{background:#ef4444;} .td2{background:#eab308;} .td3{background:#22c55e;}
+.term-title { font-size:0.75rem; color:var(--muted); font-family:var(--mono); margin-left:8px; }
+.term-body { padding:24px; font-family:var(--mono); font-size:0.82rem; line-height:1.8; }
+.t-comment { color:#4b5563; }
+.t-keyword { color:#6366f1; }
+.t-func { color:#f97316; }
+.t-string { color:#22c55e; }
+.t-num { color:#eab308; }
+.t-normal { color:#d1d5db; }
+.t-result { color:var(--green); margin-top:8px; padding:12px; background:rgba(34,197,94,0.08); border-radius:6px; border-left:2px solid var(--green); }
+.cursor { display:inline-block; width:8px; height:14px; background:var(--accent); animation:blink 1s infinite; vertical-align:middle; }
+@keyframes blink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+
+/* STATS BAR */
+.stats-bar { position:relative; z-index:1; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--surface); padding:28px 60px; display:flex; justify-content:center; gap:80px; flex-wrap:wrap; }
+.stat-item { text-align:center; }
+.stat-item .num { font-family:var(--mono); font-size:1.8rem; font-weight:700; color:var(--text); }
+.stat-item .num span { color:var(--accent); }
+.stat-item .lbl { font-size:0.78rem; color:var(--muted); margin-top:4px; letter-spacing:1px; text-transform:uppercase; }
+
+/* PROBLEMS SECTION */
+.section { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:80px 60px; }
+.section-head { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:32px; flex-wrap:wrap; gap:16px; }
+.section-head h2 { font-size:1.8rem; font-weight:800; letter-spacing:-0.5px; }
+.section-head a { color:var(--accent); text-decoration:none; font-size:0.88rem; font-weight:600; }
+.filter-row { display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; }
+.filter { padding:7px 16px; border-radius:20px; border:1px solid var(--border); background:none; color:var(--muted); font-size:0.82rem; cursor:pointer; font-family:'Familjen Grotesk',sans-serif; transition:all 0.15s; }
+.filter.active, .filter:hover { background:var(--accent); color:#fff; border-color:var(--accent); font-weight:600; }
+
+/* PROBLEM TABLE */
+.problem-table { width:100%; border-collapse:collapse; }
+.problem-table thead tr { border-bottom:1px solid var(--border); }
+.problem-table th { padding:12px 16px; text-align:left; font-size:0.75rem; color:var(--muted); font-weight:600; letter-spacing:1px; text-transform:uppercase; }
+.problem-table tbody tr { border-bottom:1px solid rgba(30,30,46,0.6); transition:background 0.15s; cursor:pointer; }
+.problem-table tbody tr:hover { background:var(--surface); }
+.problem-table td { padding:16px; font-size:0.9rem; }
+.diff-badge { padding:3px 10px; border-radius:4px; font-size:0.75rem; font-weight:700; font-family:var(--mono); }
+.easy { background:rgba(34,197,94,0.12); color:var(--green); }
+.medium { background:rgba(234,179,8,0.12); color:var(--yellow); }
+.hard { background:rgba(239,68,68,0.12); color:var(--red); }
+.company-tags { display:flex; gap:6px; flex-wrap:wrap; }
+.company-tag { background:var(--surface); border:1px solid var(--border); padding:2px 8px; border-radius:4px; font-size:0.72rem; color:var(--muted); font-family:var(--mono); }
+.solved-icon { color:var(--green); font-size:1rem; }
+.prob-num { color:var(--muted); font-family:var(--mono); font-size:0.82rem; }
+.prob-title { font-weight:600; }
+.prob-title:hover { color:var(--accent); }
+.acceptance { font-family:var(--mono); font-size:0.82rem; color:var(--muted); }
+
+/* FEATURES */
+.features-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
+.feat-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:32px; transition:all 0.3s; }
+.feat-card:hover { border-color:var(--accent); transform:translateY(-3px); box-shadow:0 20px 60px rgba(0,0,0,0.3); }
+.feat-icon { font-size:2rem; margin-bottom:16px; }
+.feat-card h3 { font-size:1.05rem; font-weight:700; margin-bottom:10px; }
+.feat-card p { font-size:0.86rem; color:var(--muted); line-height:1.7; }
+.feat-tag { display:inline-block; background:rgba(249,115,22,0.1); color:var(--accent); padding:2px 8px; border-radius:4px; font-size:0.72rem; font-weight:700; margin-top:12px; }
+
+/* COMPANIES */
+.companies { position:relative; z-index:1; background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:60px; text-align:center; }
+.companies h2 { font-size:0.78rem; letter-spacing:4px; text-transform:uppercase; color:var(--muted); margin-bottom:32px; }
+.company-logos { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+.co-logo { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 24px; font-family:var(--mono); font-size:0.88rem; font-weight:700; color:var(--text); transition:all 0.2s; cursor:pointer; }
+.co-logo:hover { border-color:var(--accent); color:var(--accent); }
+
+/* PRICING */
+.pricing-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; margin-top:48px; }
+.price-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:36px; position:relative; transition:all 0.3s; }
+.price-card:hover { transform:translateY(-4px); }
+.price-card.featured { border-color:var(--accent); background:linear-gradient(135deg,rgba(249,115,22,0.05) 0%,var(--card) 100%); }
+.price-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--accent); color:#fff; padding:4px 16px; border-radius:20px; font-size:0.72rem; font-weight:700; letter-spacing:1px; white-space:nowrap; }
+.plan-label { font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:12px; font-family:var(--mono); }
+.plan-price { font-size:3.5rem; font-weight:800; line-height:1; margin-bottom:6px; font-family:var(--mono); }
+.plan-price span { font-size:1.2rem; color:var(--muted); }
+.plan-desc { font-size:0.84rem; color:var(--muted); margin-bottom:28px; }
+.plan-list { list-style:none; margin-bottom:28px; }
+.plan-list li { padding:8px 0; border-bottom:1px solid rgba(30,30,46,0.8); font-size:0.86rem; display:flex; align-items:center; gap:10px; }
+.plan-list li::before { content:'✓'; color:var(--accent); font-weight:800; }
+.plan-list li.no::before { content:'✕'; color:var(--muted); }
+.plan-list li.no { color:var(--muted); }
+.plan-btn { display:block; text-align:center; padding:13px; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.9rem; transition:all 0.2s; }
+.plan-btn.free { background:var(--surface); color:var(--text); border:1px solid var(--border); }
+.plan-btn.free:hover { border-color:var(--accent); color:var(--accent); }
+.plan-btn.pro { background:var(--accent); color:#fff; }
+.plan-btn.pro:hover { background:#ea6c0a; }
+
+/* CTA BANNER */
+.cta-banner { position:relative; z-index:1; margin:0 60px 80px; background:linear-gradient(135deg,#1a0a00 0%,#0f0f14 100%); border:1px solid rgba(249,115,22,0.3); border-radius:20px; padding:60px; text-align:center; overflow:hidden; }
+.cta-banner::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(249,115,22,0.15) 0%,transparent 70%); pointer-events:none; }
+.cta-banner h2 { font-size:clamp(1.8rem,4vw,3rem); font-weight:800; margin-bottom:16px; position:relative; }
+.cta-banner p { color:var(--muted); font-size:1rem; margin-bottom:32px; position:relative; }
+.cta-banner .btn-primary { display:inline-flex; position:relative; }
+
+footer {
+  position:relative; z-index:1;
+  border-top:1px solid var(--border); padding:40px 60px;
+  display:grid; grid-template-columns:2fr 1fr 1fr; gap:40px;
+}
+.footer-brand .logo { margin-bottom:12px; }
+.footer-brand p { font-size:0.84rem; color:var(--muted); line-height:1.7; max-width:260px; }
+.footer-col h4 { font-size:0.78rem; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+.footer-col a { display:block; color:#9ca3af; text-decoration:none; font-size:0.86rem; margin-bottom:10px; transition:color 0.15s; }
+.footer-col a:hover { color:var(--accent); }
+.footer-bottom { grid-column:1/-1; border-top:1px solid var(--border); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.8rem; color:var(--muted); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.hero-content { animation:fadeUp 0.6s ease both; }
+.hero-visual { animation:fadeUp 0.6s 0.15s ease both; }
+
+@media(max-width:900px) {
+  nav { padding:0 20px; }
+  .nav-links { display:none; }
+  .hero { padding:80px 20px 60px; }
+  .hero-top { grid-template-columns:1fr; gap:40px; }
+  .stats-bar { padding:24px 20px; gap:32px; }
+  .section { padding:60px 20px; }
+  .companies { padding:40px 20px; }
+  .cta-banner { margin:0 20px 60px; padding:40px 24px; }
+  footer { padding:40px 20px; grid-template-columns:1fr 1fr; }
+  footer .footer-brand { grid-column:1/-1; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-icon">{'}</div>
+    Code<span>Prep</span>
+  </div>
+  <div class="nav-links">
+    <a href="problems.html">Problems</a>
+    <a href="#companies">Companies</a>
+    <a href="#pricing">Pricing</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-badge"><span>●</span> 100% Free</div>
+    <a href="problems.html" class="btn-start">Start Practicing →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="tag">NEW</span>
+        LeetCode alternative — completely free
+      </div>
+      <h1>
+        Crack Your
+        <span class="line-accent">Dream Job<br>Interview</span>
+        <span class="line-dim">No subscriptions. No paywalls. Ever.</span>
+      </h1>
+      <p class="hero-desc">500+ curated coding questions with hints, video solutions, and plain English explanations. Practice for Google, Meta, Amazon, Apple — totally free.</p>
+      <div class="hero-actions">
+        <a href="problems.html" class="btn-primary">🚀 Start Practicing Free</a>
+        <a href="#features" class="btn-outline">See How It Works</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><span class="dot"></span> No credit card</div>
+        <div class="trust-item"><span class="dot"></span> No signup needed</div>
+        <div class="trust-item"><span class="dot"></span> No paywalls</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="terminal">
+        <div class="term-bar">
+          <div class="term-dot td1"></div>
+          <div class="term-dot td2"></div>
+          <div class="term-dot td3"></div>
+          <div class="term-title">two_sum.py — CodePrep</div>
+        </div>
+        <div class="term-body">
+<span class="t-comment"># Problem: Two Sum — Easy ✓</span>
+<span class="t-comment"># Asked by: Google, Amazon, Meta</span>
+
+<span class="t-keyword">def</span> <span class="t-func">two_sum</span>(nums, target):
+  seen = {}
+  <span class="t-keyword">for</span> i, num <span class="t-keyword">in</span> <span class="t-func">enumerate</span>(nums):
+    complement = target - num
+    <span class="t-keyword">if</span> complement <span class="t-keyword">in</span> seen:
+      <span class="t-keyword">return</span> [seen[complement], i]
+    seen[num] = i
+
+<span class="t-comment"># Test it:</span>
+<span class="t-func">print</span>(two_sum([<span class="t-num">2</span>,<span class="t-num">7</span>,<span class="t-num">11</span>,<span class="t-num">15</span>], <span class="t-num">9</span>))
+<div class="t-result">✅ Output: [0, 1] — Accepted!
+⏱ Runtime: O(n) | Memory: O(n)</div>
+<span class="cursor"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="num">500<span>+</span></div><div class="lbl">Problems</div></div>
+  <div class="stat-item"><div class="num">50<span>k+</span></div><div class="lbl">Users</div></div>
+  <div class="stat-item"><div class="num">100<span>%</span></div><div class="lbl">Free Forever</div></div>
+  <div class="stat-item"><div class="num">30<span>+</span></div><div class="lbl">Companies</div></div>
+  <div class="stat-item"><div class="num">0<span>$</span></div><div class="lbl">Cost</div></div>
+</div>
+
+<!-- PROBLEMS PREVIEW -->
+<section class="section">
+  <div class="section-head">
+    <h2>📋 Practice Problems</h2>
+    <a href="problems.html">View all 500+ problems →</a>
+  </div>
+  <div class="filter-row">
+    <button class="filter active" onclick="filterProbs(this,'all')">All</button>
+    <button class="filter" onclick="filterProbs(this,'easy')">🟢 Easy</button>
+    <button class="filter" onclick="filterProbs(this,'medium')">🟡 Medium</button>
+    <button class="filter" onclick="filterProbs(this,'hard')">🔴 Hard</button>
+    <button class="filter" onclick="filterProbs(this,'google')">Google</button>
+    <button class="filter" onclick="filterProbs(this,'meta')">Meta</button>
+    <button class="filter" onclick="filterProbs(this,'amazon')">Amazon</button>
+  </div>
+  <table class="problem-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Difficulty</th>
+        <th>Companies</th>
+        <th>Acceptance</th>
+      </tr>
+    </thead>
+    <tbody id="prob-list">
+      <tr onclick="location.href='problem.html'">
+        <td class="prob-num">1</td>
+        <td><span class="prob-title">Two Sum</span></td>
+        <td><span class="diff-badge easy">Easy</span></td>
+        <td><div class="company-tags"><span class="company-tag">Google</span><span class="company-tag">Amazon</span><span class="company-tag">Meta</span></div></td>
+        <td class="acceptance">49.2%</td>
+      </tr>
+      <tr onclick="location.href='problem.html'">
+        <td class="prob-num">2</td>
+        <td><span class="prob-title">Longest Substring Without Repeating</span></td>
+        <td><span class="diff-badge medium">Medium</span></td>
+        <td><div class="company-tags"><span class="company-tag">Google</span><span class="company-tag">Apple</span></div></td>
+        <td class="acceptance">33.7%</td>
+      </tr>
+      <tr onclick="location.href='problem.html'">
+        <td class="prob-num">3</td>
+        <td><span class="prob-title">Median of Two Sorted Arrays</span></td>
+        <td><span class="diff-badge hard">Hard</span></td>
+        <td><div class="company-tags"><span class="company-tag">Amazon</span><span class="company-tag">Microsoft</span></div></td>
+        <td class="acceptance">38.1%</td>
+      </tr>
+      <tr onclick="location.href='problem.html'">
+        <td class="prob-num">4</td>
+        <td><span class="prob-title">Valid Parentheses</span></td>
+        <td><span class="diff-badge easy">Easy</span></td>
+        <td><div class="company-tags"><span class="company-tag">Meta</span><span class="company-tag">Bloomberg</span></div></td>
+        <td class="acceptance">40.8%</td>
+      </tr>
+      <tr onclick="location.href='problem.html'">
+        <td class="prob-num">5</td>
+        <td><span class="prob-title">Maximum Subarray (Kadane's)</span></td>
+        <td><span class="diff-badge medium">Medium</span></td>
+        <td><div class="company-tags"><span class="company-tag">Google</span><span class="company-tag">Netflix</span></div></td>
+        <td class="acceptance">49.8%</td>
+      </tr>
+      <tr onclick="location.href='problem.html'">
+        <td class="prob-num">6</td>
+        <td><span class="prob-title">Binary Search</span></td>
+        <td><span class="diff-badge easy">Easy</span></td>
+        <td><div class="company-tags"><span class="company-tag">Amazon</span><span class="company-tag">Apple</span></div></td>
+        <td class="acceptance">55.3%</td>
+      </tr>
+      <tr onclick="location.href='problem.html'">
+        <td class="prob-num">7</td>
+        <td><span class="prob-title">Merge K Sorted Lists</span></td>
+        <td><span class="diff-badge hard">Hard</span></td>
+        <td><div class="company-tags"><span class="company-tag">Google</span><span class="company-tag">Uber</span></div></td>
+        <td class="acceptance">47.2%</td>
+      </tr>
+      <tr onclick="location.href='problem.html'">
+        <td class="prob-num">8</td>
+        <td><span class="prob-title">Number of Islands</span></td>
+        <td><span class="diff-badge medium">Medium</span></td>
+        <td><div class="company-tags"><span class="company-tag">Amazon</span><span class="company-tag">Google</span></div></td>
+        <td class="acceptance">57.1%</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-head"><h2>⚡ Why CodePrep?</h2></div>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">💡</div>
+      <h3>Step-by-Step Hints</h3>
+      <p>Stuck on a problem? Get progressive hints that guide your thinking without spoiling the solution.</p>
+      <span class="feat-tag">FREE</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📖</div>
+      <h3>Plain English Explanations</h3>
+      <p>Every solution explained like you're 5. No jargon, no confusing math. Just clear, simple breakdowns.</p>
+      <span class="feat-tag">FREE</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🏢</div>
+      <h3>Filtered by Company</h3>
+      <p>Interviewing at Google next week? Filter problems by company to practice exactly what they ask.</p>
+      <span class="feat-tag">FREE</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <h3>Track Your Progress</h3>
+      <p>Mark problems as solved, track your streak, and see which topics need more practice.</p>
+      <span class="feat-tag">FREE</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎯</div>
+      <h3>Study Plans</h3>
+      <p>14-day, 30-day, and 90-day interview prep plans. Follow the plan and get interview-ready systematically.</p>
+      <span class="feat-tag">FREE</span>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">👥</div>
+      <h3>Community Discussion</h3>
+      <p>Discuss solutions with other developers. Learn different approaches and share your insights.</p>
+      <span class="feat-tag">FREE</span>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANIES -->
+<div class="companies" id="companies">
+  <h2>Problems asked at top companies</h2>
+  <div class="company-logos">
+    <div class="co-logo">🔍 Google</div>
+    <div class="co-logo">📘 Meta</div>
+    <div class="co-logo">📦 Amazon</div>
+    <div class="co-logo">🍎 Apple</div>
+    <div class="co-logo">🪟 Microsoft</div>
+    <div class="co-logo">🚗 Uber</div>
+    <div class="co-logo">🏠 Airbnb</div>
+    <div class="co-logo">💳 Stripe</div>
+    <div class="co-logo">🎵 Spotify</div>
+    <div class="co-logo">🎬 Netflix</div>
+    <div class="co-logo">💼 LinkedIn</div>
+    <div class="co-logo">🏦 Goldman</div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-head"><h2>💰 Simple Pricing</h2></div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="plan-label">Free Forever</div>
+      <div class="plan-price">$0</div>
+      <div class="plan-desc">Everything you need to prep for interviews</div>
+      <ul class="plan-list">
+        <li>500+ coding problems</li>
+        <li>Hints for every problem</li>
+        <li>Plain English solutions</li>
+        <li>Filter by company</li>
+        <li>Progress tracking</li>
+        <li class="no">Mock interview mode</li>
+        <li class="no">AI code review</li>
+      </ul>
+      <a href="problems.html" class="plan-btn free">Start Free →</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">MOST POPULAR</div>
+      <div class="plan-label">Pro — Coming Soon</div>
+      <div class="plan-price">$9<span>/mo</span></div>
+      <div class="plan-desc">For serious job seekers</div>
+      <ul class="plan-list">
+        <li>Everything in Free</li>
+        <li>Mock interview mode</li>
+        <li>AI code review & feedback</li>
+        <li>Video solutions</li>
+        <li>Interview tips by company</li>
+        <li>Priority support</li>
+        <li>Certificate of completion</li>
+      </ul>
+      <a href="/cdn-cgi/l/email-protection#3e565b5252517e5d515a5b4e4c5b4e105751014d4b5c545b5d4a037d515a5b6e4c5b4e1e6e4c511e695f574a52574d4a" class="plan-btn pro">Join Waitlist →</a>
+    </div>
+    <div class="price-card">
+      <div class="plan-label">Teams</div>
+      <div class="plan-price">$29<span>/mo</span></div>
+      <div class="plan-desc">For bootcamps & universities</div>
+      <ul class="plan-list">
+        <li>Everything in Pro</li>
+        <li>Up to 30 students</li>
+        <li>Instructor dashboard</li>
+        <li>Custom problem sets</li>
+        <li>Progress reports</li>
+        <li>Slack integration</li>
+        <li>Dedicated support</li>
+      </ul>
+      <a href="/cdn-cgi/l/email-protection#88e0ede4e4e7c8ebe7ecedf8faedf8a6e1e7b7fbfdeae2edebfcb5cbe7ecedd8faedf8a8dcede9e5fba8d8e4e9e6" class="plan-btn free">Contact Us →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <h2>Ready to Land Your Dream Job? 🚀</h2>
+  <p>Join 50,000+ developers who practice on CodePrep. Start today — it's completely free.</p>
+  <a href="problems.html" class="btn-primary" style="font-size:1rem;padding:16px 36px;">Start Practicing For Free →</a>
+</div>
+
+<footer>
+  <div class="footer-brand">
+    <div class="logo" style="font-family:var(--mono);font-weight:700;font-size:1.1rem;margin-bottom:12px;">{'} Code<span style="color:var(--accent)">Prep</span></div>
+    <p>Free coding interview prep for everyone. No paywalls, no subscriptions. Beat LeetCode.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Practice</h4>
+    <a href="problems.html">All Problems</a>
+    <a href="problems.html">Easy Problems</a>
+    <a href="problems.html">Medium Problems</a>
+    <a href="problems.html">Hard Problems</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="about.html">About Us</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="/cdn-cgi/l/email-protection#d6beb3babab996b5b9b2b3a6a4b3a6f8bfb9">Contact Us</a>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2025 CodePrep · 100% Free, Forever</div>
+    <div style="font-family:var(--mono);font-size:0.75rem;">Built with ❤️ for developers</div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script
