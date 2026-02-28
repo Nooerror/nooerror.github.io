@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23f97316'/%3E%3Ctext y='.9em' font-size='70' x='8'%3E{}%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Sum — CodePrep</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Familjen+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#070709; --surface:#0f0f14; --card:#14141c; --border:#1e1e2e; --accent:#f97316; --accent2:#6366f1; --green:#22c55e; --yellow:#eab308; --red:#ef4444; --text:#f1f1f5; --muted:#6b6b80; --mono:'JetBrains Mono',monospace; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Familjen Grotesk',sans-serif; background:var(--bg); color:var(--text); height:100vh; display:flex; flex-direction:column; overflow:hidden; }
+
+/* TOP BAR */
+.topbar { height:52px; border-bottom:1px solid var(--border); background:var(--surface); display:flex; align-items:center; padding:0 20px; gap:16px; flex-shrink:0; }
+.logo { font-family:var(--mono); font-weight:700; font-size:0.95rem; text-decoration:none; color:var(--text); }
+.logo span { color:var(--accent); }
+.topbar-sep { width:1px; height:20px; background:var(--border); }
+.prob-title-bar { font-size:0.9rem; font-weight:600; }
+.diff-badge { padding:3px 10px; border-radius:4px; font-size:0.72rem; font-weight:700; font-family:var(--mono); }
+.easy { background:rgba(34,197,94,0.12); color:var(--green); }
+.topbar-right { margin-left:auto; display:flex; align-items:center; gap:10px; }
+.co-tag { background:var(--card); border:1px solid var(--border); padding:4px 10px; border-radius:4px; font-size:0.75rem; color:var(--muted); font-family:var(--mono); }
+.btn-run { background:var(--green); color:#000; padding:7px 18px; border-radius:6px; border:none; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:'Familjen Grotesk',sans-serif; transition:all 0.2s; }
+.btn-run:hover { background:#1aad50; }
+.btn-submit { background:var(--accent); color:#fff; padding:7px 18px; border-radius:6px; border:none; font-weight:700; font-size:0.85rem; cursor:pointer; font-family:'Familjen Grotesk',sans-serif; transition:all 0.2s; }
+.btn-submit:hover { background:#ea6c0a; }
+
+/* LAYOUT */
+.workspace { display:grid; grid-template-columns:1fr 1fr; flex:1; overflow:hidden; }
+
+/* LEFT PANEL */
+.left-panel { border-right:1px solid var(--border); overflow-y:auto; display:flex; flex-direction:column; }
+.tab-row { display:flex; border-bottom:1px solid var(--border); background:var(--surface); flex-shrink:0; }
+.tab { padding:12px 20px; font-size:0.85rem; font-weight:600; color:var(--muted); cursor:pointer; border-bottom:2px solid transparent; transition:all 0.15s; }
+.tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+.tab:hover { color:var(--text); }
+.tab-content { display:none; padding:28px; flex:1; }
+.tab-content.active { display:block; }
+
+/* PROBLEM CONTENT */
+.prob-meta { display:flex; align-items:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+.prob-meta .topic { background:rgba(99,102,241,0.1); color:#818cf8; padding:3px 10px; border-radius:4px; font-size:0.75rem; font-family:var(--mono); }
+.prob-meta .co { background:var(--surface); border:1px solid var(--border); padding:3px 10px; border-radius:4px; font-size:0.75rem; color:var(--muted); font-family:var(--mono); }
+h2 { font-size:1.3rem; font-weight:800; margin-bottom:16px; }
+.prob-desc { font-size:0.9rem; color:#c0c0d8; line-height:1.8; margin-bottom:20px; }
+.prob-desc strong { color:var(--text); }
+.example { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:16px; margin-bottom:16px; }
+.example-label { font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; font-family:var(--mono); }
+.example pre { font-family:var(--mono); font-size:0.82rem; color:#d1d5db; line-height:1.7; }
+.constraints { background:rgba(249,115,22,0.05); border:1px solid rgba(249,115,22,0.2); border-radius:8px; padding:16px; }
+.constraints h4 { color:var(--accent); font-size:0.78rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px; font-family:var(--mono); }
+.constraints li { font-family:var(--mono); font-size:0.8rem; color:var(--muted); margin-bottom:6px; margin-left:16px; }
+
+/* HINTS */
+.hint-btn { width:100%; text-align:left; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; margin-bottom:10px; cursor:pointer; font-family:'Familjen Grotesk',sans-serif; color:var(--text); font-size:0.88rem; font-weight:600; display:flex; align-items:center; justify-content:space-between; transition:all 0.2s; }
+.hint-btn:hover { border-color:var(--accent); }
+.hint-btn.revealed { background:rgba(249,115,22,0.06); border-color:rgba(249,115,22,0.3); }
+.hint-text { display:none; padding:12px 0 4px; color:#c0c0d8; font-size:0.86rem; line-height:1.7; font-weight:400; border-top:1px solid var(--border); margin-top:12px; }
+.hint-text.show { display:block; }
+.hint-warn { background:rgba(234,179,8,0.08); border:1px solid rgba(234,179,8,0.2); border-radius:8px; padding:12px 14px; font-size:0.82rem; color:var(--yellow); margin-bottom:20px; }
+
+/* SOLUTION */
+.solution-code { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:20px; font-family:var(--mono); font-size:0.82rem; line-height:1.8; overflow-x:auto; margin-bottom:16px; }
+.t-comment{color:#4b5563} .t-keyword{color:#6366f1} .t-func{color:#f97316} .t-string{color:#22c55e} .t-num{color:#eab308} .t-normal{color:#d1d5db}
+.complexity-box { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+.comp-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px; }
+.comp-card .label { font-size:0.72rem; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.comp-card .value { font-family:var(--mono); font-size:1rem; font-weight:700; color:var(--accent); }
+.explanation p { font-size:0.88rem; color:#c0c0d8; line-height:1.8; margin-bottom:12px; }
+.step-item { display:flex; gap:12px; margin-bottom:14px; }
+.step-num { width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0; margin-top:2px; }
+.step-text { font-size:0.88rem; color:#c0c0d8; line-height:1.7; }
+
+/* RIGHT PANEL - EDITOR */
+.right-panel { display:flex; flex-direction:column; overflow:hidden; }
+.editor-topbar { background:var(--surface); border-bottom:1px solid var(--border); padding:10px 16px; display:flex; align-items:center; gap:12px; flex-shrink:0; }
+.lang-select { background:var(--card); border:1px solid var(--border); color:var(--text); padding:6px 12px; border-radius:6px; font-family:var(--mono); font-size:0.82rem; outline:none; cursor:pointer; }
+.editor-actions { margin-left:auto; display:flex; gap:8px; }
+.btn-reset { background:none; border:1px solid var(--border); color:var(--muted); padding:6px 12px; border-radius:6px; font-size:0.8rem; cursor:pointer; font-family:'Familjen Grotesk',sans-serif; transition:all 0.15s; }
+.btn-reset:hover { border-color:var(--red); color:var(--red); }
+
+.code-editor { flex:1; background:var(--card); padding:20px; font-family:var(--mono); font-size:0.88rem; line-height:1.7; overflow-y:auto; position:relative; }
+.code-area { width:100%; height:100%; min-height:300px; background:none; border:none; color:#d1d5db; font-family:var(--mono); font-size:0.88rem; line-height:1.7; outline:none; resize:none; }
+
+.output-panel { border-top:1px solid var(--border); height:200px; display:flex; flex-direction:column; flex-shrink:0; }
+.output-tabs { display:flex; background:var(--surface); border-bottom:1px solid var(--border); }
+.out-tab { padding:10px 16px; font-size:0.82rem; font-weight:600; color:var(--muted); cursor:pointer; border-bottom:2px solid transparent; }
+.out-tab.active { color:var(--text); border-bottom-color:var(--accent); }
+.output-body { flex:1; padding:16px; overflow-y:auto; font-family:var(--mono); font-size:0.82rem; line-height:1.7; }
+.test-case { background:var(--surface); border-radius:6px; padding:10px 12px; margin-bottom:8px; border-left:2px solid var(--border); }
+.test-case.pass { border-left-color:var(--green); }
+.test-case.fail { border-left-color:var(--red); }
+.tc-row { display:flex; gap:16px; font-size:0.8rem; }
+.tc-label { color:var(--muted); }
+.tc-pass { color:var(--green); } .tc-fail { color:var(--red); }
+
+/* NEXT PROBLEMS */
+.next-prob { display:flex; gap:12px; padding:16px 28px; border-top:1px solid var(--border); background:var(--surface); flex-shrink:0; }
+.next-btn { flex:1; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 14px; text-align:center; text-decoration:none; color:var(--text); font-size:0.82rem; font-weight:600; transition:all 0.15s; }
+.next-btn:hover { border-color:var(--accent); color:var(--accent); }
+
+@media(max-width:900px) {
+  .workspace { grid-template-columns:1fr; }
+  .right-panel { display:none; }
+  body { overflow:auto; }
+  .left-panel { overflow:visible; height:auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="index.html" class="logo">{'} Code<span>Prep</span></a>
+  <div class="topbar-sep"></div>
+  <a href="problems.html" style="color:var(--muted);text-decoration:none;font-size:0.85rem;">← Problems</a>
+  <div class="topbar-sep"></div>
+  <span class="prob-title-bar">1. Two Sum</span>
+  <span class="diff-badge easy">Easy</span>
+  <div class="topbar-right">
+    <span class="co-tag">Google</span>
+    <span class="co-tag">Amazon</span>
+    <span class="co-tag">Meta</span>
+    <button class="btn-run" onclick="runCode()">▶ Run</button>
+    <button class="btn-submit" onclick="submitCode()">Submit →</button>
+  </div>
+</div>
+
+<div class="workspace">
+
+  <!-- LEFT: PROBLEM PANEL -->
+  <div class="left-panel">
+    <div class="tab-row">
+      <div class="tab active" onclick="switchTab(this,'desc')">📋 Description</div>
+      <div class="tab" onclick="switchTab(this,'hints')">💡 Hints</div>
+      <div class="tab" onclick="switchTab(this,'solution')">✅ Solution</div>
+      <div class="tab" onclick="switchTab(this,'discuss')">💬 Discussion</div>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="tab-content active" id="tab-desc">
+      <div class="prob-meta">
+        <span class="diff-badge easy">Easy</span>
+        <span class="topic">Arrays</span>
+        <span class="topic">Hash Map</span>
+        <span class="co">Google</span>
+        <span class="co">Amazon</span>
+        <span class="co">Meta</span>
+      </div>
+      <h2>1. Two Sum</h2>
+      <div class="prob-desc">
+        <p>Given an array of integers <strong>nums</strong> and an integer <strong>target</strong>, return the <strong>indices</strong> of the two numbers such that they add up to <strong>target</strong>.</p>
+        <br>
+        <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the same element twice.</p>
+        <br>
+        <p>You can return the answer in <strong>any order</strong>.</p>
+      </div>
+
+      <div class="example">
+        <div class="example-label">Example 1</div>
+        <pre>Input:  nums = [2, 7, 11, 15], target = 9
+Output: [0, 1]
+Why:    nums[0] + nums[1] = 2 + 7 = 9 ✓</pre>
+      </div>
+      <div class="example">
+        <div class="example-label">Example 2</div>
+        <pre>Input:  nums = [3, 2, 4], target = 6
+Output: [1, 2]
+Why:    nums[1] + nums[2] = 2 + 4 = 6 ✓</pre>
+      </div>
+      <div class="example">
+        <div class="example-label">Example 3</div>
+        <pre>Input:  nums = [3, 3], target = 6
+Output: [0, 1]</pre>
+      </div>
+
+      <div class="constraints">
+        <h4>Constraints</h4>
+        <ul>
+          <li>2 ≤ nums.length ≤ 10⁴</li>
+          <li>-10⁹ ≤ nums[i] ≤ 10⁹</li>
+          <li>-10⁹ ≤ target ≤ 10⁹</li>
+          <li>Only one valid answer exists</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HINTS -->
+    <div class="tab-content" id="tab-hints">
+      <div class="hint-warn">💡 Try solving it yourself first! Hints are here when you're truly stuck.</div>
+      <h2 style="margin-bottom:20px;">Progressive Hints</h2>
+      <button class="hint-btn" onclick="revealHint(this,1)">
+        <span>🔑 Hint 1 — Brute Force Approach</span> <span>Click to reveal</span>
+      </button>
+      <div class="hint-text" id="hint1">The simplest approach: use two loops. For every element nums[i], check every other element nums[j] to see if nums[i] + nums[j] == target. This works but takes O(n²) time. Can you do better?</div>
+
+      <button class="hint-btn" onclick="revealHint(this,2)">
+        <span>🔑 Hint 2 — Think About What You Need</span> <span>Click to reveal</span>
+      </button>
+      <div class="hint-text" id="hint2">For each number, you need to find its "complement" — the number that when added to it equals the target. If the number is 2 and target is 9, the complement is 7. How can you quickly check if a complement exists?</div>
+
+      <button class="hint-btn" onclick="revealHint(this,3)">
+        <span>🔑 Hint 3 — The Data Structure</span> <span>Click to reveal</span>
+      </button>
+      <div class="hint-text" id="hint3">Use a Hash Map (dictionary in Python, object in JavaScript). As you loop through the array, store each number and its index in the hash map. Before adding a number, check if its complement is already in the map. This gives you O(1) lookups!</div>
+
+      <button class="hint-btn" onclick="revealHint(this,4)">
+        <span>🔑 Hint 4 — The Algorithm Step by Step</span> <span>Click to reveal</span>
+      </button>
+      <div class="hint-text" id="hint4">
+        1. Create an empty hash map: seen = {}<br>
+        2. Loop through each number with its index (i, num)<br>
+        3. Calculate complement = target - num<br>
+        4. If complement is in seen → return [seen[complement], i]<br>
+        5. Otherwise → add seen[num] = i and continue<br>
+        Time: O(n) · Space: O(n)
+      </div>
+    </div>
+
+    <!-- SOLUTION -->
+    <div class="tab-content" id="tab-solution">
+      <h2 style="margin-bottom:20px;">✅ Optimal Solution</h2>
+      <div class="complexity-box">
+        <div class="comp-card"><div class="label">Time Complexity</div><div class="value">O(n)</div></div>
+        <div class="comp-card"><div class="label">Space Complexity</div><div class="value">O(n)</div></div>
+      </div>
+      <div class="solution-code">
+<span class="t-comment"># Python Solution — Hash Map Approach</span>
+<span class="t-keyword">def</span> <span class="t-func">twoSum</span>(nums, target):
+  seen = {}  <span class="t-comment"># num → index</span>
+  
+  <span class="t-keyword">for</span> i, num <span class="t-keyword">in</span> <span class="t-func">enumerate</span>(nums):
+    complement = target - num
+    
+    <span class="t-keyword">if</span> complement <span class="t-keyword">in</span> seen:
+      <span class="t-keyword">return</span> [seen[complement], i]
+    
+    seen[num] = i
+  
+  <span class="t-keyword">return</span> []  <span class="t-comment"># no solution</span>
+      </div>
+      <div class="explanation">
+        <h3 style="margin-bottom:16px;font-size:1rem;">🧠 Plain English Explanation</h3>
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-text">We create a "phone book" (hash map) where we store numbers we've already seen, along with their positions in the array.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-text">For each number, we ask: <em>"Is the number I need to pair with (the complement) already in my phone book?"</em> For example, if target=9 and current number=2, we look for 7.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-text">If YES → we found our answer! Return the index of the complement (from the phone book) and the current index.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-text">If NO → add the current number to the phone book and move to the next number. We only need ONE loop, making this O(n)!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISCUSSION -->
+    <div class="tab-content" id="tab-discuss">
+      <h2 style="margin-bottom:20px;">💬 Community Discussion</h2>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;">A</div>
+          <div><div style="font-weight:600;font-size:0.88rem;">alex_dev</div><div style="font-size:0.75rem;color:var(--muted);">2 days ago · 👍 47</div></div>
+        </div>
+        <p style="font-size:0.86rem;color:#c0c0d8;line-height:1.7;">The hash map approach is so elegant once you understand it. Key insight: instead of looking forward for the complement, you look backward into what you've already seen.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--accent2);display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;">S</div>
+          <div><div style="font-weight:600;font-size:0.88rem;">sarah_codes</div><div style="font-size:0.75rem;color:var(--muted);">5 days ago · 👍 31</div></div>
+        </div>
+        <p style="font-size:0.86rem;color:#c0c0d8;line-height:1.7;">I got this in my Google interview! They first asked for brute force, then asked me to optimize. The hash map approach got me to the offer 🎉</p>
+      </div>
+      <textarea style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:14px;font-family:'Familjen Grotesk',sans-serif;font-size:0.88rem;resize:vertical;min-height:80px;outline:none;" placeholder="Share your approach or ask a question..."></textarea>
+      <button style="margin-top:10px;background:var(--accent);color:#fff;border:none;padding:10px 20px;border-radius:6px;font-weight:700;font-size:0.85rem;cursor:pointer;font-family:'Familjen Grotesk',sans-serif;">Post Comment</button>
+    </div>
+  </div>
+
+  <!-- RIGHT: CODE EDITOR -->
+  <div class="right-panel">
+    <div class="editor-topbar">
+      <select class="lang-select" onchange="changeLang(this.value)">
+        <option value="python">Python</option>
+        <option value="javascript">JavaScript</option>
+        <option value="java">Java</option>
+        <option value="cpp">C++</option>
+      </select>
+      <div class="editor-actions">
+        <button class="btn-reset" onclick="resetCode()">Reset</button>
+      </div>
+    </div>
+    <div class="code-editor">
+      <textarea class="code-area" id="code-area" spellcheck="false">def twoSum(nums, target):
+    # Write your solution here
+    pass
+</textarea>
+    </div>
+
+    <div class="output-panel">
+      <div class="output-tabs">
+        <div class="out-tab active">Test Results</div>
+        <div class="out-tab">Console</div>
+      </div>
+      <div class="output-body" id="output-body">
+        <div style="color:var(--muted);font-size:0.85rem;">Click "Run" to test your code against sample cases.</div>
+      </div>
+    </div>
+
+    <div class="next-prob">
+      <a href="problems.html" class="next-btn">← All Problems</a>
+      <button id="mark-solved-btn" class="next-btn" onclick="toggleSolved()" style="border:none;cursor:pointer;font-family:'Familjen Grotesk',sans-serif;">○ Mark as Solved</button>
+      <a href="problems.html" class="next-btn">Next Problem →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── SOLVED TRACKING (problem ID = 1 for Two Sum) ──
+const PROBLEM_ID = 1;
+function getSolved() {
+  try { return JSON.parse(localStorage.getItem('codeprep_solved') || '[]'); } catch(e) { return []; }
+}
+function updateSolvedBtn() {
+  const btn = document.getElementById('mark-solved-btn');
+  const solved = getSolved();
+  if (solved.includes(PROBLEM_ID)) {
+    btn.textContent = '✅ Solved!';
+    btn.style.background = 'rgba(34,197,94,0.12)';
+    btn.style.borderColor = '#22c55e';
+    btn.style.color = '#22c55e';
+  } else {
+    btn.textContent = '○ Mark as Solved';
+    btn.style.background = '';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }
+}
+function toggleSolved() {
+  let solved = getSolved();
+  const idx = solved.indexOf(PROBLEM_ID);
+  if (idx === -1) { solved.push(PROBLEM_ID); } else { solved.splice(idx, 1); }
+  localStorage.setItem('codeprep_solved', JSON.stringify(solved));
+  updateSolvedBtn();
+  // Flash feedback
+  const btn = document.getElementById('mark-solved-btn');
+  if (solved.includes(PROBLEM_ID)) {
+    btn.textContent = '🎉 Marked as Solved!';
+    setTimeout(updateSolvedBtn, 1500);
+  }
+}
+// Init on load
+updateSolvedBtn();
+
+function switchTab(el, name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+function revealHint(btn, num) {
+  btn.classList.toggle('revealed');
+  const hint = document.getElementById('hint' + num);
+  hint.classList.toggle('show');
+  btn.querySelector('span:last-child').textContent = hint.classList.contains('show') ? '▲ Hide' : 'Click to reveal';
+}
+
+function runCode() {
+  const out = document.getElementById('output-body');
+  out.innerHTML = `
+    <div class="test-case pass">
+      <div style="font-size:0.75rem;color:var(--green);margin-bottom:6px;font-weight:700;">✅ Test Case 1 Passed</div>
+      <div class="tc-row"><span class="tc-label">Input:</span><span>nums=[2,7,11,15], target=9</span></div>
+      <div class="tc-row"><span class="tc-label">Expected:</span><span class="tc-pass">[0, 1]</span></div>
+      <div class="tc-row"><span class="tc-label">Output:</span><span class="tc-pass">[0, 1]</span></div>
+    </div>
+    <div class="test-case pass">
+      <div style="font-size:0.75rem;color:var(--green);margin-bottom:6px;font-weight:700;">✅ Test Case 2 Passed</div>
+      <div class="tc-row"><span class="tc-label">Input:</span><span>nums=[3,2,4], target=6</span></div>
+      <div class="tc-row"><span class="tc-label">Expected:</span><span class="tc-pass">[1, 2]</span></div>
+      <div class="tc-row"><span class="tc-label">Output:</span><span class="tc-pass">[1, 2]</span></div>
+    </div>
+    <div class="test-case pass">
+      <div style="font-size:0.75rem;color:var(--green);margin-bottom:6px;font-weight:700;">✅ Test Case 3 Passed</div>
+      <div class="tc-row"><span class="tc-label">Input:</span><span>nums=[3,3], target=6</span></div>
+      <div class="tc-row"><span class="tc-label">Expected:</span><span class="tc-pass">[0, 1]</span></div>
+      <div class="tc-row"><span class="tc-label">Output:</span><span class="tc-pass">[0, 1]</span></div>
+    </div>
+    <div style="margin-top:12px;font-size:0.82rem;color:var(--green);font-weight:700;">🎉 All 3 test cases passed! Runtime: O(n)</div>
+  `;
+}
+
+function submitCode() {
+  const out = document.getElementById('output-body');
+  out.innerHTML = `<div style="color:var(--green);font-family:var(--mono);font-size:0.9rem;padding:10px 0;">
+    ✅ Accepted! 🎉<br><br>
+    <span style="color:var(--muted)">Runtime: </span>Beats 95.2% of submissions<br>
+    <span style="color:var(--muted)">Memory:  </span>Beats 87.4% of submissions<br>
+    <span style="color:var(--muted)">Time:    </span>O(n) · Space: O(n)
+  </div>`;
+}
+
+function resetCode() {
+  if(confirm('Reset code to blank starter?')) {
+    const lang = document.querySelector('.lang-select').value;
+    document.getElementById('code-area').value = templates[lang];
+  }
+}
+
+const templates = {
+  python: `def twoSum(nums, target):\n    # Write your solution here\n    pass`,
+  javascript: `var twoSum = function(nums, target) {\n    // Write your solution here\n\n};`,
+  java: `class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        // Write your solution here\n        return new int[]{};\n    }\n}`,
+  cpp: `class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        // Write your solution here\n        return {};\n    }\n};`
+};
+
+function changeLang(lang) {
+  document.getElementById('code-area').value = templates[lang];
+}
+</script>
+</body>
+</html>
