@@ -21,18 +21,13 @@ nav { position:sticky; top:0; z-index:100; padding:0 60px; height:64px; display:
 .nav-links a { padding:7px 14px; border-radius:6px; text-decoration:none; color:var(--muted); font-size:0.88rem; font-weight:500; transition:all 0.15s; }
 .nav-links a:hover,.nav-links a.active { color:var(--text); background:var(--surface); }
 .btn-start { background:var(--accent); color:#fff; padding:8px 20px; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.88rem; }
-
-/* LAYOUT */
 .page { position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:70px 60px 80px; display:grid; grid-template-columns:1fr 1.4fr; gap:80px; align-items:start; }
-
-/* LEFT INFO */
 .contact-info {}
 .eyebrow { display:inline-flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:6px 16px; font-size:0.78rem; font-family:var(--mono); color:var(--muted); margin-bottom:24px; }
 .eyebrow span { color:var(--accent); }
 .contact-info h1 { font-size:clamp(2rem,4vw,3rem); font-weight:800; letter-spacing:-1px; line-height:1.1; margin-bottom:16px; }
 .contact-info h1 em { font-style:normal; color:var(--accent); }
 .contact-info .intro { color:var(--muted); font-size:0.95rem; line-height:1.8; margin-bottom:48px; }
-
 .contact-methods { display:flex; flex-direction:column; gap:16px; margin-bottom:48px; }
 .contact-method { display:flex; align-items:flex-start; gap:16px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; transition:all 0.2s; text-decoration:none; }
 .contact-method:hover { border-color:var(--accent); transform:translateX(4px); }
@@ -40,71 +35,38 @@ nav { position:sticky; top:0; z-index:100; padding:0 60px; height:64px; display:
 .ic1{background:rgba(249,115,22,0.12);} .ic2{background:rgba(99,102,241,0.12);} .ic3{background:rgba(34,197,94,0.12);}
 .method-info h3 { font-weight:700; font-size:0.92rem; margin-bottom:4px; color:var(--text); }
 .method-info p { font-size:0.82rem; color:var(--muted); line-height:1.5; }
-.method-info a { color:var(--accent); text-decoration:none; font-family:var(--mono); font-size:0.82rem; }
-
+.method-info span { color:var(--accent); font-family:var(--mono); font-size:0.82rem; }
 .response-box { background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.2); border-radius:10px; padding:16px 18px; display:flex; align-items:center; gap:12px; }
 .response-dot { width:8px; height:8px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; flex-shrink:0; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
 .response-box p { font-size:0.84rem; color:#c0c0d8; }
 .response-box strong { color:var(--green); }
-
-/* FORM */
 .contact-form-wrap { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:40px; }
 .form-title { font-size:1.3rem; font-weight:800; margin-bottom:6px; }
 .form-subtitle { font-size:0.86rem; color:var(--muted); margin-bottom:32px; }
-
 .form-group { margin-bottom:20px; }
 .form-group label { display:block; font-size:0.82rem; font-weight:600; color:var(--text); margin-bottom:8px; font-family:var(--mono); letter-spacing:0.5px; }
 .form-group label .req { color:var(--accent); }
-.form-group input,
-.form-group textarea,
-.form-group select {
-  width:100%; padding:12px 16px;
-  background:var(--surface); border:1px solid var(--border);
-  color:var(--text); border-radius:10px;
-  font-family:'Familjen Grotesk',sans-serif; font-size:0.9rem;
-  outline:none; transition:all 0.2s;
-}
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus { border-color:var(--accent); background:rgba(249,115,22,0.03); box-shadow:0 0 0 3px rgba(249,115,22,0.08); }
-.form-group input::placeholder,
-.form-group textarea::placeholder { color:var(--muted); }
+.form-group input, .form-group textarea, .form-group select { width:100%; padding:12px 16px; background:var(--surface); border:1px solid var(--border); color:var(--text); border-radius:10px; font-family:'Familjen Grotesk',sans-serif; font-size:0.9rem; outline:none; transition:all 0.2s; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--accent); background:rgba(249,115,22,0.03); box-shadow:0 0 0 3px rgba(249,115,22,0.08); }
+.form-group input::placeholder, .form-group textarea::placeholder { color:var(--muted); }
 .form-group textarea { resize:vertical; min-height:120px; line-height:1.6; }
 .form-group select option { background:var(--card); }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-
-/* CHARACTER COUNT */
 .char-count { text-align:right; font-size:0.75rem; color:var(--muted); margin-top:4px; font-family:var(--mono); }
-.char-count.warn { color:var(--yellow); }
-
-/* SUBMIT */
-.submit-btn {
-  width:100%; padding:15px; background:var(--accent); color:#fff;
-  border:none; border-radius:10px; font-weight:700; font-size:1rem;
-  cursor:pointer; font-family:'Familjen Grotesk',sans-serif;
-  transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:8px;
-  margin-top:8px;
-}
+.char-count.warn { color:#eab308; }
+.submit-btn { width:100%; padding:15px; background:var(--accent); color:#fff; border:none; border-radius:10px; font-weight:700; font-size:1rem; cursor:pointer; font-family:'Familjen Grotesk',sans-serif; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:8px; margin-top:8px; }
 .submit-btn:hover:not(:disabled) { background:#ea6c0a; transform:translateY(-2px); box-shadow:0 12px 40px rgba(249,115,22,0.3); }
 .submit-btn:disabled { opacity:0.7; cursor:not-allowed; transform:none; }
-
-/* SUCCESS STATE */
 .success-state { display:none; text-align:center; padding:40px 20px; }
 .success-state .check { font-size:4rem; margin-bottom:20px; }
 .success-state h3 { font-size:1.5rem; font-weight:800; margin-bottom:12px; }
 .success-state p { color:var(--muted); font-size:0.92rem; line-height:1.7; }
-.success-state .back-btn { display:inline-block; margin-top:24px; background:var(--surface); border:1px solid var(--border); color:var(--text); padding:10px 24px; border-radius:8px; text-decoration:none; font-weight:600; font-size:0.88rem; transition:all 0.2s; cursor:pointer; }
+.success-state .back-btn { display:inline-block; margin-top:24px; background:var(--surface); border:1px solid var(--border); color:var(--text); padding:10px 24px; border-radius:8px; text-decoration:none; font-weight:600; font-size:0.88rem; transition:all 0.2s; }
 .success-state .back-btn:hover { border-color:var(--accent); color:var(--accent); }
-
-/* ERROR */
 .field-error { font-size:0.78rem; color:var(--red); margin-top:5px; display:none; }
-.form-group.error input,
-.form-group.error textarea,
-.form-group.error select { border-color:var(--red); }
+.form-group.error input, .form-group.error textarea, .form-group.error select { border-color:var(--red); }
 .form-group.error .field-error { display:block; }
-
-/* FAQ */
 .faq-section { position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:0 60px 80px; }
 .faq-section h2 { font-size:1.5rem; font-weight:800; margin-bottom:8px; }
 .faq-section .sub { color:var(--muted); font-size:0.9rem; margin-bottom:32px; }
@@ -116,7 +78,6 @@ nav { position:sticky; top:0; z-index:100; padding:0 60px; height:64px; display:
 .faq-item.open h3 .arr { transform:rotate(180deg); }
 .faq-body { display:none; font-size:0.86rem; color:var(--muted); line-height:1.7; }
 .faq-item.open .faq-body { display:block; }
-
 footer { position:relative; z-index:1; border-top:1px solid var(--border); padding:32px 60px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.82rem; color:var(--muted); }
 footer a { color:var(--muted); text-decoration:none; margin:0 10px; }
 footer a:hover { color:var(--accent); }
@@ -144,36 +105,35 @@ footer a:hover { color:var(--accent); }
 </nav>
 
 <div class="page">
-
-  <!-- LEFT: INFO -->
   <div class="contact-info">
     <div class="eyebrow"><span>{'}</span> Get In Touch</div>
     <h1>We'd Love to<br><em>Hear From You</em></h1>
     <p class="intro">Got a bug to report? Want to suggest a new problem? Have a question? We read every message and reply within 48 hours.</p>
 
     <div class="contact-methods">
-      <a href="/cdn-cgi/l/email-protection#472f222b2b28072428232237352237692e28" class="contact-method">
+      <!-- ✅ REPLACE these emails with your real email address -->
+      <a href="mailto:YOUR_EMAIL@gmail.com" class="contact-method">
         <div class="method-icon ic1">📧</div>
         <div class="method-info">
           <h3>Email Us</h3>
           <p>For general questions and support</p>
-          <a href="/cdn-cgi/l/email-protection#0169646d6d6e41626e6564717364712f686e"><span class="__cf_email__" data-cfemail="58303d343437183b373c3d282a3d28763137">[email&#160;protected]</span></a>
+          <span>YOUR_EMAIL@gmail.com</span>
         </div>
       </a>
-      <a href="/cdn-cgi/l/email-protection#ee8c9b899dae8d818a8b9e9c8b9ec08781" class="contact-method">
+      <a href="mailto:YOUR_EMAIL@gmail.com?subject=Bug Report" class="contact-method">
         <div class="method-icon ic2">🐛</div>
         <div class="method-info">
           <h3>Report a Bug</h3>
           <p>Found something broken? Let us know!</p>
-          <a href="/cdn-cgi/l/email-protection#5e3c2b392d1e3d313a3b2e2c3b2e703731"><span class="__cf_email__" data-cfemail="f99b8c9e8ab99a969d9c898b9c89d79096">[email&#160;protected]</span></a>
+          <span>YOUR_EMAIL@gmail.com</span>
         </div>
       </a>
-      <a href="/cdn-cgi/l/email-protection#2252504d404e474f5162414d4647525047520c4b4d" class="contact-method">
+      <a href="mailto:YOUR_EMAIL@gmail.com?subject=Problem Suggestion" class="contact-method">
         <div class="method-icon ic3">💡</div>
         <div class="method-info">
           <h3>Suggest a Problem</h3>
           <p>Help us grow the problem library</p>
-          <a href="/cdn-cgi/l/email-protection#84f4f6ebe6e8e1e9f7c4e7ebe0e1f4f6e1f4aaedeb"><span class="__cf_email__" data-cfemail="1a6a687578767f77695a79757e7f6a687f6a347375">[email&#160;protected]</span></a>
+          <span>YOUR_EMAIL@gmail.com</span>
         </div>
       </a>
     </div>
@@ -184,7 +144,6 @@ footer a:hover { color:var(--accent); }
     </div>
   </div>
 
-  <!-- RIGHT: FORM -->
   <div class="contact-form-wrap">
     <div id="form-view">
       <div class="form-title">Send a Message</div>
@@ -229,7 +188,7 @@ footer a:hover { color:var(--accent); }
         <div class="form-group">
           <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-family:'Familjen Grotesk',sans-serif;letter-spacing:0;">
             <input type="checkbox" id="inp-newsletter" style="width:16px;height:16px;accent-color:var(--accent);">
-            <span style="font-size:0.86rem;color:var(--muted);font-weight:400;">Subscribe to our newsletter for new problems and tips (optional)</span>
+            <span style="font-size:0.86rem;color:var(--muted);font-weight:400;">Subscribe to newsletter for new problems and tips (optional)</span>
           </label>
         </div>
 
@@ -239,46 +198,43 @@ footer a:hover { color:var(--accent); }
       </form>
     </div>
 
-    <!-- SUCCESS STATE -->
     <div class="success-state" id="success-view">
       <div class="check">✅</div>
       <h3>Message Sent!</h3>
-      <p>Thanks for reaching out! We've received your message and will reply to your email within 24–48 hours.</p>
+      <p>Thanks for reaching out! We'll reply to your email within 24–48 hours.</p>
       <p style="margin-top:12px;">In the meantime, why not keep practicing?</p>
       <a href="problems.html" class="back-btn">Browse Problems →</a>
     </div>
   </div>
-
 </div>
 
-<!-- FAQ -->
 <div class="faq-section">
   <h2>❓ Frequently Asked Questions</h2>
   <div class="sub">Quick answers before you reach out.</div>
   <div class="faq-grid">
     <div class="faq-item" onclick="toggleFaq(this)">
       <h3>Is CodePrep really free? <span class="arr">▼</span></h3>
-      <div class="faq-body">Yes, 100% free. No credit card required. No trial period. The core features — all problems, hints, solutions, company filters — are completely free forever.</div>
+      <div class="faq-body">Yes, 100% free. No credit card required. No trial period. All problems, hints, solutions and company filters are completely free forever.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <h3>Why did my progress disappear? <span class="arr">▼</span></h3>
-      <div class="faq-body">Your progress is stored in your browser's localStorage. If you cleared your browser data, switched browsers, or used a private/incognito window, your progress won't carry over. We recommend noting your solved problems if you switch devices.</div>
+      <div class="faq-body">Your progress is stored in your browser's localStorage. If you cleared your browser data, switched browsers, or used a private/incognito window, your progress won't carry over.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <h3>Can I contribute problems? <span class="arr">▼</span></h3>
-      <div class="faq-body">Absolutely! Email us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e393918c818f868e90a3808c878693918693cd8a8c">[email&#160;protected]</a> with your problem idea — include the description, examples, constraints, hints, and solution. If it meets our quality bar, we'll add it and credit you.</div>
+      <div class="faq-body">Absolutely! Send us a message using the form with your problem idea — include the description, examples, constraints, hints, and solution. If it meets our quality bar, we'll add it and credit you.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <h3>When is the Pro plan coming? <span class="arr">▼</span></h3>
-      <div class="faq-body">We're working on Pro features including mock interview mode, AI code review, and video solutions. Join the waitlist by emailing <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="29414c454546694a464d4c595b4c59074046">[email&#160;protected]</a> — we'll notify you when it launches.</div>
+      <div class="faq-body">We're working on Pro features including mock interview mode, AI code review, and video solutions. Send us a message to join the waitlist — we'll notify you when it launches.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <h3>The solution for a problem is wrong! <span class="arr">▼</span></h3>
-      <div class="faq-body">Sorry about that! Please email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="791b0c1e0a391a161d1c090b1c09571016">[email&#160;protected]</a> with the problem number, which part is wrong, and what the correct answer should be. We review and fix these within 24 hours.</div>
+      <div class="faq-body">Sorry about that! Use the form above, select "Wrong Solution / Typo", and tell us the problem number and what's incorrect. We fix these within 24 hours.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <h3>Can I use CodePrep for my bootcamp students? <span class="arr">▼</span></h3>
-      <div class="faq-body">Yes! CodePrep is free for educational use. For a Teams plan with instructor dashboards and custom problem sets, email us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8de5e8e1e1e2cdeee2e9e8fdffe8fda3e4e2">[email&#160;protected]</a> and we'll set you up.</div>
+      <div class="faq-body">Yes! CodePrep is free for educational use. For a Teams plan with instructor dashboards and custom problem sets, send us a message and we'll set you up.</div>
     </div>
   </div>
 </div>
@@ -288,8 +244,15 @@ footer a:hover { color:var(--accent); }
   <div><a href="index.html">Home</a><a href="problems.html">Problems</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Char counter
+<script>
+// ──────────────────────────────────────────────────
+// ✅ FORMSPREE SETUP — 3 steps:
+// 1. Go to formspree.io → sign up free
+// 2. Create new form → copy your code e.g. "xyzabc123"
+// 3. Replace YOUR_FORMSPREE_CODE below with that code
+// ──────────────────────────────────────────────────
+const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORMSPREE_CODE';
+
 function updateCharCount() {
   const msg = document.getElementById('inp-message');
   const counter = document.getElementById('char-count');
@@ -298,24 +261,20 @@ function updateCharCount() {
   counter.className = 'char-count' + (len > 900 ? ' warn' : '');
 }
 
-// FAQ toggle
 function toggleFaq(el) {
   el.classList.toggle('open');
 }
 
-// Form validation & submit
 document.getElementById('contact-form').addEventListener('submit', function(e) {
   e.preventDefault();
   let valid = true;
 
-  // Name
   const name = document.getElementById('inp-name');
   const fgName = document.getElementById('fg-name');
   if (!name.value.trim() || name.value.trim().length < 2) {
     fgName.classList.add('error'); valid = false;
   } else { fgName.classList.remove('error'); }
 
-  // Email
   const email = document.getElementById('inp-email');
   const fgEmail = document.getElementById('fg-email');
   const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -323,12 +282,60 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     fgEmail.classList.add('error'); valid = false;
   } else { fgEmail.classList.remove('error'); }
 
-  // Subject
   const subject = document.getElementById('inp-subject');
   const fgSubject = document.getElementById('fg-subject');
   if (!subject.value) {
     fgSubject.classList.add('error'); valid = false;
   } else { fgSubject.classList.remove('error'); }
 
-  // Message
-  const message = document
+  const message = document.getElementById('inp-message');
+  const fgMessage = document.getElementById('fg-message');
+  if (!message.value.trim() || message.value.trim().length < 20) {
+    fgMessage.classList.add('error'); valid = false;
+  } else { fgMessage.classList.remove('error'); }
+
+  if (!valid) return;
+
+  // Show loading state
+  const btn = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+  btn.disabled = true;
+  btnText.textContent = 'Sending...';
+
+  // ✅ THIS IS WHERE FORMSPREE SENDS THE EMAIL
+  fetch(FORMSPREE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: name.value,
+      email: email.value,
+      subject: subject.value,
+      message: message.value
+    })
+  })
+  .then(response => {
+    if (response.ok) {
+      // ✅ SUCCESS — show thank you screen
+      document.getElementById('form-view').style.display = 'none';
+      document.getElementById('success-view').style.display = 'block';
+    } else {
+      // ❌ ERROR — show error message
+      btnText.textContent = 'Failed to send. Try emailing us directly.';
+      btn.disabled = false;
+    }
+  })
+  .catch(() => {
+    // ❌ NETWORK ERROR
+    btnText.textContent = 'Network error. Try emailing us directly.';
+    btn.disabled = false;
+  });
+});
+
+['inp-name','inp-email','inp-subject','inp-message'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    document.getElementById(id).closest('.form-group').classList.remove('error');
+  });
+});
+</script>
+</body>
+</html>
