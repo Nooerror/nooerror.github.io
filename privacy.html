@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23f97316'/%3E%3Ctext y='.9em' font-size='70' x='8'%3E{}%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — CodePrep</title>
+<meta name="description" content="CodePrep Privacy Policy — how we collect, use and protect your data.">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Familjen+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#070709; --surface:#0f0f14; --card:#14141c; --border:#1e1e2e; --accent:#f97316; --text:#f1f1f5; --muted:#6b6b80; --mono:'JetBrains Mono',monospace; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Familjen Grotesk',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:0; background-image:linear-gradient(rgba(30,30,46,0.4) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,46,0.4) 1px,transparent 1px); background-size:40px 40px; }
+nav { position:sticky; top:0; z-index:100; padding:0 60px; height:64px; display:flex; align-items:center; justify-content:space-between; background:rgba(7,7,9,0.9); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+.logo { font-family:var(--mono); font-weight:700; font-size:1.1rem; display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.logo-icon { width:32px; height:32px; background:var(--accent); border-radius:8px; display:flex; align-items:center; justify-content:center; }
+.logo span { color:var(--accent); }
+.nav-links { display:flex; gap:4px; }
+.nav-links a { padding:7px 14px; border-radius:6px; text-decoration:none; color:var(--muted); font-size:0.88rem; font-weight:500; transition:all 0.15s; }
+.nav-links a:hover,.nav-links a.active { color:var(--text); background:var(--surface); }
+.btn-start { background:var(--accent); color:#fff; padding:8px 20px; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.88rem; }
+
+.page-hero { position:relative; z-index:1; padding:70px 60px 50px; max-width:860px; margin:0 auto; }
+.eyebrow { display:inline-flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:6px 16px; font-size:0.78rem; font-family:var(--mono); color:var(--muted); margin-bottom:20px; }
+.eyebrow span { color:var(--accent); }
+.page-hero h1 { font-size:2.8rem; font-weight:800; letter-spacing:-1px; margin-bottom:12px; }
+.page-hero .updated { font-family:var(--mono); font-size:0.82rem; color:var(--muted); }
+
+.content { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0 60px 80px; }
+
+/* TOC */
+.toc { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:28px; margin-bottom:48px; }
+.toc h3 { font-size:0.78rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); font-family:var(--mono); margin-bottom:16px; }
+.toc ol { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.toc ol li a { color:var(--muted); text-decoration:none; font-size:0.88rem; transition:color 0.15s; display:flex; align-items:center; gap:8px; }
+.toc ol li a:hover { color:var(--accent); }
+.toc ol li a::before { content:'→'; color:var(--border); font-size:0.75rem; }
+
+/* SECTIONS */
+.policy-section { margin-bottom:48px; padding-bottom:48px; border-bottom:1px solid var(--border); }
+.policy-section:last-of-type { border-bottom:none; }
+.section-num { font-family:var(--mono); font-size:0.72rem; color:var(--accent); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+.policy-section h2 { font-size:1.3rem; font-weight:800; margin-bottom:16px; }
+.policy-section p { color:#c0c0d8; font-size:0.92rem; line-height:1.85; margin-bottom:14px; }
+.policy-section p:last-child { margin-bottom:0; }
+.policy-section a { color:var(--accent); }
+.highlight-box { background:rgba(249,115,22,0.06); border:1px solid rgba(249,115,22,0.2); border-radius:10px; padding:18px 20px; margin:16px 0; }
+.highlight-box p { color:#f97316; margin-bottom:0; font-weight:500; }
+.data-table { width:100%; border-collapse:collapse; margin:16px 0; }
+.data-table th { background:var(--surface); padding:10px 14px; text-align:left; font-size:0.78rem; color:var(--muted); font-weight:600; letter-spacing:1px; text-transform:uppercase; border:1px solid var(--border); }
+.data-table td { padding:10px 14px; font-size:0.86rem; color:#c0c0d8; border:1px solid var(--border); line-height:1.6; }
+.tag-yes { color:var(--green); font-family:var(--mono); font-size:0.8rem; font-weight:700; }
+.tag-no { color:var(--muted); font-family:var(--mono); font-size:0.8rem; }
+
+footer { position:relative; z-index:1; border-top:1px solid var(--border); padding:32px 60px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.82rem; color:var(--muted); }
+footer a { color:var(--muted); text-decoration:none; margin:0 10px; }
+footer a:hover { color:var(--accent); }
+@media(max-width:768px) {
+  nav { padding:0 20px; } .nav-links { display:none; }
+  .page-hero { padding:50px 20px 30px; } .page-hero h1 { font-size:2rem; }
+  .content { padding:0 20px 60px; }
+  .toc ol { grid-template-columns:1fr; }
+  footer { padding:24px 20px; flex-direction:column; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo"><div class="logo-icon">{'}</div>Code<span>Prep</span></a>
+  <div class="nav-links">
+    <a href="problems.html">Problems</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html" class="active">Privacy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="problems.html" class="btn-start">Start Practicing →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow"><span>//</span> Legal</div>
+  <h1>Privacy Policy</h1>
+  <div class="updated">Last updated: January 1, 2025</div>
+</div>
+
+<div class="content">
+
+  <!-- TOC -->
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#s1">What Data We Collect</a></li>
+      <li><a href="#s2">How We Use Data</a></li>
+      <li><a href="#s3">Cookies</a></li>
+      <li><a href="#s4">Google AdSense</a></li>
+      <li><a href="#s5">Data Storage</a></li>
+      <li><a href="#s6">Third-Party Links</a></li>
+      <li><a href="#s7">Children's Privacy</a></li>
+      <li><a href="#s8">Your Rights</a></li>
+      <li><a href="#s9">Changes to Policy</a></li>
+      <li><a href="#s10">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <div class="highlight-box">
+    <p>🔒 Short version: We collect minimal data, we don't sell it, your progress is stored in your own browser, and ads are served by Google AdSense.</p>
+  </div>
+
+  <div class="policy-section" id="s1">
+    <div class="section-num">// 01</div>
+    <h2>What Data We Collect</h2>
+    <p>CodePrep does not require account creation. You can use all free features without providing any personal information.</p>
+    <table class="data-table">
+      <thead><tr><th>Data Type</th><th>Collected?</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Name / Email</td><td class="tag-no">NO</td><td>Not required for free use</td></tr>
+        <tr><td>IP Address</td><td class="tag-yes">YES</td><td>Standard server logs (auto)</td></tr>
+        <tr><td>Browser type</td><td class="tag-yes">YES</td><td>Analytics (Google Analytics)</td></tr>
+        <tr><td>Pages visited</td><td class="tag-yes">YES</td><td>Analytics to improve site</td></tr>
+        <tr><td>Solved problems</td><td class="tag-no">NO</td><td>Stored locally in your browser only</td></tr>
+        <tr><td>Payment info</td><td class="tag-no">NO</td><td>Handled by Gumroad/Ko-fi</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="policy-section" id="s2">
+    <div class="section-num">// 02</div>
+    <h2>How We Use Data</h2>
+    <p>Any information collected is used solely to improve website performance and user experience. Specifically we use analytics data to understand which problems are most popular, which pages get visited most, and where users come from so we can improve the site.</p>
+    <p>We do <strong>not</strong> sell, trade, rent, or transfer your personally identifiable information to any outside parties. Ever.</p>
+  </div>
+
+  <div class="policy-section" id="s3">
+    <div class="section-num">// 03</div>
+    <h2>Cookies</h2>
+    <p>Our website uses cookies for two purposes: analytics (Google Analytics) and advertising (Google AdSense). Cookies are small files stored in your browser.</p>
+    <p>You can instruct your browser to refuse all cookies or alert you when cookies are being sent. If you disable cookies, some parts of the site may not function correctly, but core problem-solving features will still work.</p>
+  </div>
+
+  <div class="policy-section" id="s4">
+    <div class="section-num">// 04</div>
+    <h2>Google AdSense & Advertising</h2>
+    <p>CodePrep uses Google AdSense to display advertisements. This is how we fund the site and keep it free for everyone. Google uses cookies to serve ads based on your prior visits to our website and other websites on the internet.</p>
+    <p>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank">Google Ads Settings</a>. You can also opt out via the <a href="https://optout.networkadvertising.org/" target="_blank">Network Advertising Initiative opt-out page</a>.</p>
+  </div>
+
+  <div class="policy-section" id="s5">
+    <div class="section-num">// 05</div>
+    <h2>Data Storage & Security</h2>
+    <p>Your problem-solving progress (which problems you've solved, your streak, bookmarks) is stored entirely in your browser's localStorage. This data never leaves your device and is never transmitted to our servers.</p>
+    <p>This means your progress is private to you, but it also means if you clear your browser data, your progress will be reset. We recommend noting your solved problems if you plan to switch browsers or devices.</p>
+  </div>
+
+  <div class="policy-section" id="s6">
+    <div class="section-num">// 06</div>
+    <h2>Third-Party Links & Affiliates</h2>
+    <p>CodePrep contains affiliate links to third-party services such as Udemy courses and web hosting providers. When you click these links and make a purchase, we may earn a small commission at no additional cost to you.</p>
+    <p>We only recommend products we genuinely believe in. Affiliate relationships do not influence our content or reviews. We are not responsible for the privacy practices of third-party websites.</p>
+  </div>
+
+  <div class="policy-section" id="s7">
+    <div class="section-num">// 07</div>
+    <h2>Children's Privacy</h2>
+    <p>CodePrep is not directed to children under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately.</p>
+  </div>
+
+  <div class="policy-section" id="s8">
+    <div class="section-num">// 08</div>
+    <h2>Your Rights</h2>
+    <p>Since we collect minimal personal data and store your progress locally, there is very little data we hold about you. However you have the right to request information about any data we hold, request deletion of any data, and opt out of analytics tracking.</p>
+    <p>To exercise any of these rights, contact us at <a href="/cdn-cgi/l/email-protection#4f272a2323200f2c202b2a3f3d2a3f612620"><span class="__cf_email__" data-cfemail="b0d8d5dcdcdff0d3dfd4d5c0c2d5c09ed9df">[email&#160;protected]</span></a>.</p>
+  </div>
+
+  <div class="policy-section" id="s9">
+    <div class="section-num">// 09</div>
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by posting the new policy on this page with an updated date at the top. We encourage you to review this policy periodically.</p>
+  </div>
+
+  <div class="policy-section" id="s10">
+    <div class="section-num">// 10</div>
+    <h2>Contact Us</h2>
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:</p>
+    <p>📧 Email: <a href="/cdn-cgi/l/email-protection#1d75787171725d7e7279786d6f786d337472"><span class="__cf_email__" data-cfemail="3d55585151527d5e5259584d4f584d135452">[email&#160;protected]</span></a></p>
+    <p>Or use our <a href="contact.html">contact form</a>. We aim to respond within 48 hours.</p>
+  </div>
+
+</div>
+
+<f
